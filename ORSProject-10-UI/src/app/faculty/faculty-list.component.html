@@ -1,0 +1,452 @@
+<style>
+
+.faculty-list-bg{
+
+    background:
+    linear-gradient(
+        rgba(15,23,42,.88),
+        rgba(15,23,42,.88)
+    ),
+    url('assets/img/wall.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+
+.page-title{
+
+    color:white;
+
+    font-size:48px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-shadow:
+    0 5px 20px rgba(0,0,0,.4);
+}
+
+.search-card{
+
+    background:
+    rgba(255,255,255,.08);
+
+    backdrop-filter: blur(18px);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.35);
+
+    max-width:900px;
+
+    margin:auto;
+}
+
+.modern-input{
+
+    height:50px;
+
+    border:none;
+
+    border-radius:12px;
+}
+
+.modern-input:focus{
+
+    box-shadow:
+    0 0 0 3px rgba(37,99,235,.25);
+}
+
+.search-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    color:white;
+
+    border:none;
+
+    height:50px;
+
+    border-radius:12px;
+}
+
+.reset-btn{
+
+    background:
+    rgba(255,255,255,.12);
+
+    color:white;
+
+    border:
+    1px solid rgba(255,255,255,.15);
+
+    height:50px;
+
+    border-radius:12px;
+}
+
+.table-card{
+
+    background:
+    rgba(255,255,255,.08);
+
+    backdrop-filter: blur(18px);
+
+    border-radius:20px;
+
+    padding:15px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.35);
+}
+
+.modern-table{
+
+    color:white;
+
+    margin-bottom:0;
+}
+
+.modern-table thead{
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff7b00,
+        #ff4500
+    );
+
+    color:white;
+}
+
+.modern-table th,
+.modern-table td{
+
+    border-color:
+    rgba(255,255,255,.08);
+
+    vertical-align:middle;
+}
+
+.modern-table tbody tr:hover{
+
+    background:
+    rgba(255,255,255,.08);
+}
+
+.edit-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    border:none;
+
+    color:white;
+
+    border-radius:10px;
+}
+
+.add-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #10b981,
+        #059669
+    );
+
+    border:none;
+
+    color:white;
+}
+
+.delete-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #ef4444,
+        #dc2626
+    );
+
+    border:none;
+
+    color:white;
+}
+
+.nav-btn{
+
+    background:
+    rgba(255,255,255,.12);
+
+    border:
+    1px solid rgba(255,255,255,.15);
+
+    color:white;
+}
+
+</style>
+
+<div class="container-fluid faculty-list-bg">
+
+    <!-- TITLE -->
+    <h1 class="text-center page-title">
+        Faculty List
+    </h1>
+
+    <!-- MESSAGE -->
+    <div class="row">
+
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4 text-center">
+
+            <div *ngIf="form.error == false && form.message"
+                 class="alert alert-success alert-dismissible">
+
+                <button type="button"
+                        class="close"
+                        data-dismiss="alert">
+
+                    &times;
+
+                </button>
+
+                {{ form.message }}
+
+            </div>
+
+            <div *ngIf="form.error && form.message"
+                 class="alert alert-danger alert-dismissible">
+
+                <button type="button"
+                        class="close"
+                        data-dismiss="alert">
+
+                    &times;
+
+                </button>
+
+                {{ form.message }}
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4"></div>
+
+    </div>
+
+    <!-- SEARCH -->
+    <div *ngIf="form.list.length > 0"
+         class="search-card mt-4">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-4">
+
+                <input type="text"
+                       class="form-control modern-input"
+                       name="firstName"
+                       [(ngModel)]="form.searchParams.firstName"
+                       placeholder="Enter First Name">
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <input type="text"
+                       class="form-control modern-input"
+                       name="email"
+                       [(ngModel)]="form.searchParams.email"
+                       placeholder="Enter Email ID">
+
+            </div>
+
+            <div class="col-lg-2">
+
+                <button (click)="search()"
+                        class="btn search-btn w-100">
+
+                    <i class="fa fa-search"></i>
+                    Search
+
+                </button>
+
+            </div>
+
+            <div class="col-lg-2">
+
+                <button (click)="reset()"
+                        class="btn reset-btn w-100">
+
+                    <i class="fa fa-refresh"></i>
+                    Reset
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div *ngIf="form.list.length > 0"
+         class="table-responsive mt-4 table-card">
+
+        <table class="table modern-table text-center">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        <input type="checkbox"
+                               [(ngModel)]="isMasterSel"
+                               (change)="checkUncheckAll($event)">
+                    </th>
+
+                    <th>S.No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Qualification</th>
+                    <th>College</th>
+                    <th>Course</th>
+                    <th>Subject</th>
+                    <th>Edit</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let m of form.list; let i = index">
+
+                    <td>
+
+                        <input type="checkbox"
+                               #checkboxes
+                               (change)="checklistUpdate()"
+                               [id]="m.id"
+                               [value]="isMasterSel">
+
+                    </td>
+
+                    <td>{{(form.pageNo*5)+i+1}}</td>
+                    <td>{{m.firstName}}</td>
+                    <td>{{m.lastName}}</td>
+                    <td>{{m.dob | date : 'dd-MM-yyyy'}}</td>
+                    <td>{{m.gender}}</td>
+                    <td>{{m.phoneNo}}</td>
+                    <td>{{m.email}}</td>
+                    <td>{{m.qualification}}</td>
+                    <td>{{m.collegeName}}</td>
+                    <td>{{m.courseName}}</td>
+                    <td>{{m.subjectName}}</td>
+
+                    <td>
+
+                        <button class="btn edit-btn"
+                                (click)="forward('/faculty/' + m.id)">
+
+                            <i class="fa fa-edit"></i>
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <div *ngIf="form.list.length > 0"
+         class="row mt-4 align-items-center">
+
+        <div class="col-md-4">
+
+            <button (click)="previous()"
+                    [disabled]="form.pageNo == 0"
+                    class="btn nav-btn">
+
+                Previous
+
+            </button>
+
+        </div>
+
+        <div class="col-md-4 text-center">
+
+            <button (click)="forward('/faculty')"
+                    class="btn add-btn mr-2">
+
+                New
+
+            </button>
+
+            <button (click)="deleteMany()"
+                    class="btn delete-btn">
+
+                Delete
+
+            </button>
+
+        </div>
+
+        <div class="col-md-4 text-right">
+
+            <button (click)="next()"
+                    [disabled]="form.nextListSize == 0"
+                    class="btn nav-btn">
+
+                Next
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- NO DATA -->
+    <div *ngIf="form.list.length == 0"
+         class="text-center mt-4">
+
+        <button (click)="reset()"
+                class="btn btn-primary">
+
+            Back
+
+        </button>
+
+    </div>
+
+</div>

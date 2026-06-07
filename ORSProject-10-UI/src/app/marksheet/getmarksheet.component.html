@@ -1,0 +1,372 @@
+<style>
+
+.getmarksheet-bg{
+
+    background:
+    linear-gradient(
+        rgba(15,23,42,.85),
+        rgba(15,23,42,.85)
+    ),
+    url('assets/img/wall.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+
+.page-title{
+
+    color:white;
+
+    font-size:48px;
+
+    font-weight:700;
+
+    text-shadow:
+    0 5px 20px rgba(0,0,0,.4);
+
+    margin-bottom:30px;
+}
+
+.glass-card{
+
+    background:
+    rgba(255,255,255,.08);
+
+    backdrop-filter: blur(20px);
+
+    border-radius:25px;
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,.35);
+}
+
+.search-input{
+
+    height:55px;
+
+    border:none;
+
+    border-radius:12px;
+}
+
+.search-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #10b981,
+        #059669
+    );
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+}
+
+.reset-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+}
+
+.modern-table{
+
+    color:white;
+
+    margin-bottom:0;
+}
+
+.modern-table th{
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff7b00,
+        #ff4500
+    );
+
+    color:white;
+
+    border:none;
+}
+
+.modern-table td{
+
+    background:
+    rgba(255,255,255,.03);
+
+    border-color:
+    rgba(255,255,255,.08);
+
+    color:white;
+}
+
+.result-pass{
+
+    color:#22c55e;
+
+    font-weight:700;
+}
+
+.result-fail{
+
+    color:#ef4444;
+
+    font-weight:700;
+}
+
+</style>
+
+<div class="container-fluid getmarksheet-bg">
+
+    <h1 class="text-center page-title">
+        Get Marksheet
+    </h1>
+
+    <!-- SEARCH CARD -->
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-5">
+
+            <div class="glass-card p-4">
+
+                <form (ngSubmit)="go()">
+
+                    <input type="text"
+                           name="rollNo"
+                           class="form-control search-input mb-3"
+                           [(ngModel)]="form.data.rollNo"
+                           placeholder="Enter Roll Number">
+
+                    <div class="text-center">
+
+                        <button type="submit"
+                                class="btn search-btn mr-2">
+
+                            <i class="fa fa-search"></i>
+                            Search
+
+                        </button>
+
+                        <button type="button"
+                                class="btn reset-btn"
+                                (click)="reset()">
+
+                            <i class="fa fa-refresh"></i>
+                            Reset
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MESSAGE -->
+
+    <div class="row justify-content-center mt-3">
+
+        <div class="col-md-5">
+
+            <div *ngIf="form.error"
+                 class="alert alert-danger">
+
+                {{form.message}}
+
+            </div>
+
+            <div *ngIf="!form.error && form.message"
+                 class="alert alert-success">
+
+                {{form.message}}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RESULT -->
+
+    <div class="container mt-4"
+         *ngIf="form.list.rollNo">
+
+        <div class="glass-card p-4">
+
+            <!-- BASIC INFO -->
+
+            <table class="table modern-table text-center">
+
+                <tr>
+
+                    <th>Roll No</th>
+
+                    <td>{{form.list.rollNo}}</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Name</th>
+
+                    <td>{{form.list.name}}</td>
+
+                </tr>
+
+            </table>
+
+            <!-- SUBJECTS -->
+
+            <table class="table modern-table text-center mt-4">
+
+                <tr>
+
+                    <th>Subject</th>
+
+                    <th>Max</th>
+
+                    <th>Min</th>
+
+                    <th>Marks</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>Physics</td>
+
+                    <td>100</td>
+
+                    <td>35</td>
+
+                    <td [ngStyle]="{'color': form.list.physics > 35 ? '#22c55e':'#ef4444'}">
+
+                        {{form.list.physics}}
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Chemistry</td>
+
+                    <td>100</td>
+
+                    <td>35</td>
+
+                    <td [ngStyle]="{'color': form.list.chemistry > 35 ? '#22c55e':'#ef4444'}">
+
+                        {{form.list.chemistry}}
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Maths</td>
+
+                    <td>100</td>
+
+                    <td>35</td>
+
+                    <td [ngStyle]="{'color': form.list.maths > 35 ? '#22c55e':'#ef4444'}">
+
+                        {{form.list.maths}}
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <!-- RESULT -->
+
+            <table class="table modern-table text-center mt-4">
+
+                <tr>
+
+                    <th>Total</th>
+
+                    <td>
+
+                        {{form.list.physics + form.list.chemistry + form.list.maths}}
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Percentage</th>
+
+                    <td>
+
+                        {{((form.list.physics + form.list.chemistry + form.list.maths)*100)/300 | number:'2.0-2'}}%
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Result</th>
+
+                    <td>
+
+                        <span *ngIf="((form.list.physics + form.list.chemistry + form.list.maths)*100)/300 > 35; else fail"
+                              class="result-pass">
+
+                            PASS
+
+                        </span>
+
+                        <ng-template #fail>
+
+                            <span class="result-fail">
+
+                                FAIL
+
+                            </span>
+
+                        </ng-template>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,318 @@
+<style>
+.login-bg {
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(37,99,235,.35),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(124,58,237,.25),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(59,130,246,.15),
+            transparent 40%
+        ),
+
+        #0f172a;
+}
+
+.login-row {
+    min-height: 100vh;
+}
+.login-card{
+
+    background: rgba(30,41,59,.55);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.4),
+        0 0 40px rgba(37,99,235,.15);
+}
+
+.login-title {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.login-subtitle {
+    color: rgba(255, 255, 255, .85);
+    margin-bottom: 25px;
+}
+
+.form-label {
+    color: white;
+    font-weight: 600;
+}
+
+.required {
+    color: #ff4d4d;
+}
+
+.input-group {
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+.input-group-text {
+    background: rgba(255,255,255,.15);
+    border: none;
+    color: white;
+    width: 55px;
+    justify-content: center;
+}
+
+.form-control {
+
+    border: none;
+    height: 55px;
+
+    background: rgba(255,255,255,.92);
+
+    font-size: 15px;
+}
+
+.form-control:focus {
+
+    box-shadow:
+        0 0 0 3px rgba(37,117,252,.25);
+
+    background: white;
+}
+
+.login-btn {
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6a11cb,
+            #2575fc
+        );
+
+    color: white;
+
+    font-weight: 600;
+
+    transition: all .3s;
+}
+
+.login-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 20px rgba(37,117,252,.35);
+}
+
+.signup-btn {
+
+    height: 52px;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(255,255,255,.5);
+
+    background: rgba(255,255,255,.1);
+
+    color: white;
+
+    font-weight: 600;
+
+    transition: all .3s;
+}
+
+.signup-btn:hover {
+
+    background: rgba(255,255,255,.2);
+
+    color: white;
+}
+
+.forgot-link {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+    transition: .3s;
+}
+
+.forgot-link:hover {
+
+    color: #4dabff;
+}
+
+.alert {
+    border-radius: 12px;
+}
+
+.text-danger {
+    color: #ffb3b3 !important;
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+<div class="container-fluid login-bg">
+
+    <div class="row justify-content-center align-items-center login-row">
+
+        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10">
+
+            <div class="card login-card">
+
+                <div class="card-body p-5">
+
+                    <!-- Title -->
+                    <h2 class="text-center login-title">
+                        Welcome Back
+                    </h2>
+
+                    <p class="text-center login-subtitle">
+                        Sign in to continue
+                    </p>
+
+                    <!-- Message -->
+
+                    <div *ngIf="form.message"
+                        class="alert alert-dismissible fade show"
+                        [ngClass]="{
+                        'alert-success': !form.error,
+                        'alert-danger': form.error
+                    }">
+
+                        {{ form.message }}
+
+                        <button type="button"
+                            class="close"
+                            (click)="closeMessage()">
+
+                            <span>&times;</span>
+
+                        </button>
+
+                    </div>
+
+                    <!-- Login Id -->
+
+                    <label class="form-label">
+                        {{ 'LoginId' | translate }}
+                        <span class="required">*</span>
+                    </label>
+
+                    <div class="input-group mb-2">
+
+                        <span class="input-group-text">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+
+                        <input type="text"
+                            class="form-control"
+                            [(ngModel)]="form.data.loginId"
+                            placeholder="Enter email">
+
+                    </div>
+
+                    <div class="text-danger small mb-2">
+                        {{form.inputerror.loginId}}
+                    </div>
+
+                    <!-- Password -->
+
+                    <label class="form-label mt-3">
+                        {{ 'Password' | translate }}
+                        <span class="required">*</span>
+                    </label>
+
+                    <div class="input-group mb-2">
+
+                        <span class="input-group-text">
+                            <i class="fa fa-lock"></i>
+                        </span>
+
+                        <input type="password"
+                            class="form-control"
+                            [(ngModel)]="form.data.password"
+                            placeholder="Enter password">
+
+                    </div>
+
+                    <div class="text-danger small">
+                        {{form.inputerror.password}}
+                    </div>
+
+                    <!-- Buttons -->
+
+                   <div class="text-center mt-4">
+
+                        <button class="btn login-btn"
+                            (click)="signIn()">
+
+                            <i class="fa fa-sign-in me-2"></i>
+                            {{ 'Sign In' | translate }}
+
+                        </button>
+
+                        <button class="btn signup-btn"
+                            (click)="signUp()">
+
+                            {{ 'Sign Up' | translate }}
+
+                        </button>
+
+                    </div>
+
+                    <!-- Forgot Password -->
+
+                    <div class="text-center mt-4">
+
+                        <a class="forgot-link"
+                            [routerLink]="['/forgotpassword']">
+
+                            <i class="fa fa-key me-1"></i>
+                            {{ 'Forget my password?' | translate }}
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

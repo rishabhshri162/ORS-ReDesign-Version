@@ -1,0 +1,118 @@
+<div class="container-fluid"
+    style="background-image: url('assets/img/hostel.png'); background-size: cover; background-attachment: fixed; min-height: 100vh; padding-top: 70px; padding-bottom: 75px;">
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card shadow-lg">
+                <div class="card-body">
+
+                    <!-- TITLE -->
+                    <h3 class="text-center text-primary mb-3" *ngIf="!form.data.id">
+                        {{'Add Customer' | translate}}
+                    </h3>
+
+                    <h3 class="text-center text-primary mb-3" *ngIf="form.data.id">
+                        {{'Update Customer' | translate}}
+                    </h3>
+
+                    <!-- SUCCESS MESSAGE -->
+                    <div *ngIf="!form.error && form.message" class="alert alert-success text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <!-- ERROR MESSAGE -->
+                    <div *ngIf="form.error && form.message" class="alert alert-danger text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <form>
+
+                        <!-- CUSTOMER ID -->
+                        <label><b>{{'Customer ID' | translate}}</b></label>
+                        <input type="text" class="form-control mb-2" [(ngModel)]="form.data.customerId"
+                            name="customerId" placeholder="Enter Customer ID">
+                        <div>
+                            <span class="text-danger">{{form.inputerror.customerId}}</span>
+                        </div>
+                        <!-- CUSTOMER NAME -->
+                        <label><b>{{'Customer Name' | translate}}</b></label>
+                        <input type="text" class="form-control mb-2" [(ngModel)]="form.data.customerName"
+                            name="customerName" placeholder="Enter Customer Name">
+                        <div>
+                            <span class="text-danger">{{form.inputerror.customerName}}</span>
+                        </div>
+
+                        <!-- LOCATION -->
+                        <label><b>{{'Location' | translate}}</b></label>
+                        <input type="text" class="form-control mb-2" [(ngModel)]="form.data.location" name="location"
+                            placeholder="Enter Location">
+                        <div>
+                            <span class="text-danger">{{form.inputerror.location}}</span>
+                        </div>
+                        <!-- CONTACT NUMBER -->
+                        <label><b>{{'Contact Number' | translate}}</b></label>
+                        <input type="text" class="form-control mb-2" [(ngModel)]="form.data.contactNumber"
+                            name="contactNumber" placeholder="Enter Contact Number">
+                        <div>
+                            <span class="text-danger">{{form.inputerror.contactNumber}}</span>
+                        </div>
+
+
+                        <label><b>{{'Importance' | translate}}</b></label>
+                        <select class="form-control mb-2" [(ngModel)]="form.data.importance" name="importance">
+
+                            <option value="undefined">---Select---</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+
+                        </select>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.importance}}</span>
+                        </div>
+
+
+                        <label><b>{{'Meeting' | translate }}</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                            <select class="form-control" [(ngModel)]="form.data.meetingId" name="meetingId">
+                                <option value="undefined">--Select Meeting--</option>
+                                <option *ngFor="let obj of form.preload.meetingList" [value]="obj.key">
+                                    {{obj.value}}
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.meetingId}}</span>
+                        </div>
+
+                        <!-- BUTTONS -->
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-success me-2" (click)="submit()">
+                                {{ (form.data.id ? 'Update' : 'Save') | translate }}
+                            </button>
+
+                            <button *ngIf="form.data.id" class="btn btn-warning" [routerLink]="['/customerlist']">
+                                {{'List' | translate}}
+                            </button>
+
+                            <button *ngIf="!form.data.id" type="button" class="btn btn-warning" (click)="reset()">
+                                {{'Reset' | translate}}
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

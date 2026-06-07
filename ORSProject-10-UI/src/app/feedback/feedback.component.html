@@ -1,0 +1,119 @@
+<div class="container-fluid"
+    style="background-image: url('assets/img/23964.jpg'); background-size: cover; background-attachment: fixed; min-height: 100vh; padding-top: 70px; padding-bottom: 75px;">
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card shadow-lg">
+                <div class="card-body">
+
+                    <!-- TITLE -->
+                    <h3 class="text-center text-primary mb-3" *ngIf="!form.data.id">
+                        Add Feedback
+                    </h3>
+
+                    <h3 class="text-center text-primary mb-3" *ngIf="form.data.id">
+                        Update Feedback
+                    </h3>
+
+                    <!-- SUCCESS MESSAGE -->
+                    <div *ngIf="!form.error && form.message" class="alert alert-success text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <!-- ERROR MESSAGE -->
+                    <div *ngIf="form.error && form.message" class="alert alert-danger text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <form>
+
+                        <!-- FEEDBACK FORM ID -->
+                        <label><b>Feedback Form ID*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-id-card"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="form.data.feedbackFormId"
+                                name="feedbackFormId"
+                                placeholder="Enter Feedback Form ID">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.feedbackFormId}}</span>
+                        </div>
+
+                        <!-- PARTICIPANT NAME -->
+                        <label><b>Participant Name*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="form.data.participantName"
+                                name="participantName"
+                                placeholder="Enter Participant Name">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.participantName}}</span>
+                        </div>
+
+                        <!-- RATING -->
+                        <label><b>Rating (1-5)*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-star"></i>
+                                </span>
+                            </div>
+                            <input type="number" class="form-control"
+                                [(ngModel)]="form.data.rating"
+                                name="rating"
+                                placeholder="Enter Rating">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.rating}}</span>
+                        </div>
+
+                        <!-- COMMENTS -->
+                        <label><b>Comments*</b></label>
+                        <div class="input-group mb-2">
+                            <textarea class="form-control"
+                                [(ngModel)]="form.data.comments"
+                                name="comments"
+                                placeholder="Enter Comments"
+                                rows="3"></textarea>
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.comments}}</span>
+                        </div>
+
+                        <!-- BUTTONS -->
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-success me-2" (click)="submit()">
+                                {{form.data.id ? 'Update' : 'Save'}}
+                            </button>
+
+                            <button *ngIf="form.data.id" class="btn btn-warning" [routerLink]="['/feedbacklist']">
+                                List
+                            </button>
+
+                            <button *ngIf="!form.data.id" type="button" class="btn btn-warning" (click)="reset()">
+                                Reset
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-lg">
+                <div class="card-body">
+
+                    <!-- TITLE -->
+                    <h3 class="text-center text-primary mb-3">
+                        {{ form.data.id ? 'Update Comment' : 'Add Comment' }}
+                    </h3>
+
+                    <!-- SUCCESS MESSAGE -->
+                    <div *ngIf="!form.error && form.message" class="alert alert-success text-center">
+                        {{form.message}}
+                    </div>
+
+                    <!-- ERROR MESSAGE -->
+                    <div *ngIf="form.error && form.message" class="alert alert-danger text-center">
+                        {{form.message}}
+                    </div>
+
+                    <form>
+
+                        <!-- COMMENT CODE -->
+                        <label><b>Comment Code*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-code"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.commentCode"
+                                name="commentCode" placeholder="Enter Comment Code">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.commentCode}}</span>
+                        </div>
+                        <!-- USER NAME -->
+                        <label><b>User Name*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.userName" name="userName"
+                                placeholder="Enter User Name">
+                        </div>
+                        <div>
+                        <span class="text-danger">{{form.inputerror.userName}}</span>
+                        </div>
+
+                        <!-- CONTENT -->
+                        <label><b>Content*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-comment"></i>
+                                </span>
+                            </div>
+                            <textarea class="form-control" [(ngModel)]="form.data.content" name="content"
+                                placeholder="Enter Comment"></textarea>
+                        </div>
+                        <div>
+                        <span class="text-danger">{{form.inputerror.content}}</span>
+                        </div>
+
+                        <!-- STATUS (STATIC PRELOAD) -->
+                        <!-- STATUS -->
+                        <label><b>Status*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-toggle-on"></i>
+                                </span>
+                            </div>
+                            <select class="form-control" [(ngModel)]="form.data.status" name="status">
+                                <option [ngValue]="undefined">Select Status</option>
+                                <option [ngValue]="'Active'">Active</option>
+                                <option [ngValue]="'Inactive'">Inactive</option>
+                            </select>
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.status}}</span>
+                        </div>
+                        <!-- BUTTONS -->
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-success" (click)="submit()">
+                                {{ form.data.id ? 'Update' : 'Save' }}
+                            </button>
+
+                            <button type="button" class="btn btn-warning ml-2" (click)="reset()">
+                                Reset
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

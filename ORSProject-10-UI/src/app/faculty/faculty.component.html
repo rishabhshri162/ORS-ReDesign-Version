@@ -1,0 +1,460 @@
+<style>
+    .faculty-bg {
+
+        background:
+            linear-gradient(rgba(15, 23, 42, .85),
+                rgba(15, 23, 42, .85)),
+            url('assets/img/wall.jpg');
+
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+
+        min-height: 100vh;
+
+        padding-top: 90px;
+        padding-bottom: 90px;
+    }
+
+    .faculty-card {
+
+        background:
+            rgba(255, 255, 255, .08);
+
+        backdrop-filter: blur(20px);
+
+        border-radius: 25px;
+
+        border:
+            1px solid rgba(255, 255, 255, .08);
+
+        box-shadow:
+            0 20px 40px rgba(0, 0, 0, .35);
+    }
+
+    .form-title {
+
+        color: white;
+
+        font-size: 38px;
+
+        font-weight: 700;
+
+        text-shadow:
+            0 5px 20px rgba(0, 0, 0, .4);
+    }
+
+    .form-label {
+
+        color: white;
+
+        font-weight: 600;
+
+        margin-top: 10px;
+    }
+
+    .input-group-text {
+
+        background:
+            rgba(255, 255, 255, .15);
+
+        color: white;
+
+        border: none;
+    }
+
+    .form-control {
+
+        border: none;
+
+        min-height: 50px;
+    }
+
+    .form-control:focus {
+
+        box-shadow:
+            0 0 0 3px rgba(37, 99, 235, .25);
+    }
+
+    .error-text {
+
+        color: #ffb3b3;
+
+        font-size: 14px;
+    }
+
+    .save-btn {
+
+        background:
+            linear-gradient(135deg,
+                #10b981,
+                #059669);
+
+        color: white;
+
+        border: none;
+
+        border-radius: 12px;
+
+        padding: 10px 25px;
+    }
+
+    .reset-btn {
+
+        background:
+            rgba(255, 255, 255, .12);
+
+        color: white;
+
+        border:
+            1px solid rgba(255, 255, 255, .15);
+
+        border-radius: 12px;
+
+        padding: 10px 25px;
+    }
+</style>
+
+<div class="container-fluid faculty-bg">
+
+    <div class="row">
+
+        <div class="col-md-2"></div>
+
+        <div class="col-lg-8 col-md-8">
+
+            <div class="card faculty-card">
+
+                <div class="card-body p-4">
+
+                    <h2 class="text-center form-title" *ngIf="!form.data.id">
+                        Add Faculty
+                    </h2>
+
+                    <h2 class="text-center form-title" *ngIf="form.data.id>0">
+                        Update Faculty
+                    </h2>
+
+                    <div *ngIf="form.error == false && form.message"
+                        class="alert alert-success alert-dismissible text-center">
+
+                        <button type="button" class="close" data-dismiss="alert">
+
+                            &times;
+
+                        </button>
+
+                        {{ form.message }}
+
+                    </div>
+
+                    <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible text-center">
+
+                        <button type="button" class="close" data-dismiss="alert">
+
+                            &times;
+
+                        </button>
+
+                        {{ form.message }}
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">First Name *</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+
+                                <input type="text" class="form-control" name="firstName"
+                                    [(ngModel)]="form.data.firstName" placeholder="Enter First Name">
+                            </div>
+
+                            <div class="error-text">
+                                {{form.inputerror.firstName}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">Last Name *</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-user-circle"></i>
+                                    </div>
+                                </div>
+
+                                <input type="text" class="form-control" name="lastName" [(ngModel)]="form.data.lastName"
+                                    placeholder="Enter Last Name">
+                            </div>
+
+                            <div class="error-text">
+                                {{form.inputerror.lastName}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">Email *</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+                                </div>
+
+                                <input type="text" class="form-control" name="email" [(ngModel)]="form.data.email"
+                                    placeholder="Enter Email ID">
+                            </div>
+
+                            <div class="error-text">
+                                {{form.inputerror.email}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">Date of Birth *</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+
+                                <input type="date" class="form-control" name="dob" [(ngModel)]="form.data.dob"
+                                    [ngModel]="form.data.dob | date:'yyyy-MM-dd'" [max]="datepicker.max">
+                            </div>
+
+                            <div class="error-text">
+                                {{form.inputerror.dob}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">Gender *</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-venus-mars"></i>
+                                    </div>
+                                </div>
+
+                                <select class="form-control" name="gender" [(ngModel)]="form.data.gender">
+
+                                    <option value="undefined">
+                                        ------------Select------------
+                                    </option>
+
+                                    <option value="Male">Male</option>
+
+                                    <option value="Female">Female</option>
+
+                                </select>
+                            </div>
+
+                            <div class="error-text">
+                                {{form.inputerror.gender}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">Mobile No *</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+                                </div>
+
+                                <input type="text" class="form-control" name="phoneNo" [(ngModel)]="form.data.phoneNo"
+                                    maxlength="10" placeholder="Enter Mobile No">
+                            </div>
+
+                            <div class="error-text">
+                                {{form.inputerror.phoneNo}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">Qualification *</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-user-tie"></i>
+                                    </div>
+                                </div>
+
+                                <input type="text" class="form-control" name="qualification"
+                                    [(ngModel)]="form.data.qualification" placeholder="Enter Qualification">
+                            </div>
+
+                            <div class="error-text">
+                                {{form.inputerror.qualification}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">College *</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-building"></i>
+                                    </div>
+                                </div>
+
+                                <select class="form-control" name="collegeId" [(ngModel)]="form.data.collegeId">
+
+                                    <option value="undefined">
+                                        ------------Select------------
+                                    </option>
+
+                                    <option *ngFor="let obj of form.preload.collegeList" [value]="obj.key">
+
+                                        {{obj.value}}
+
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="error-text">
+                                {{form.inputerror.collegeId}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">Course *</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-book"></i>
+                                    </div>
+                                </div>
+
+                                <select class="form-control" name="courseId" [(ngModel)]="form.data.courseId">
+
+                                    <option value="undefined">
+                                        ------------Select------------
+                                    </option>
+
+                                    <option *ngFor="let obj of form.preload.courseList" [value]="obj.key">
+
+                                        {{obj.value}}
+
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="error-text">
+                                {{form.inputerror.courseId}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">Subject *</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-book-open"></i>
+                                    </div>
+                                </div>
+
+                                <select class="form-control" name="subjectId" [(ngModel)]="form.data.subjectId">
+
+                                    <option value="undefined">
+                                        ------------Select------------
+                                    </option>
+
+                                    <option *ngFor="let obj of form.preload.subjectList" [value]="obj.key">
+
+                                        {{obj.value}}
+
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="error-text">
+                                {{form.inputerror.subjectId}}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="text-center mt-4">
+
+                        <button *ngIf="!form.data.id" (click)="submit()" class="btn save-btn mr-2">
+
+                            Save
+
+                        </button>
+
+                        <button *ngIf="form.data.id" (click)="submit()" class="btn save-btn mr-2">
+
+                            Update
+
+                        </button>
+
+                        <button *ngIf="!form.data.id" (click)="reset()" class="btn reset-btn mr-2">
+
+                            Reset
+
+                        </button>
+
+                        <button *ngIf="form.data.id" (click)="forward('/facultylist')" class="btn reset-btn">
+
+                            List
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-2"></div>
+
+    </div>
+
+</div>

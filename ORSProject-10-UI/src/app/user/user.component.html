@@ -1,0 +1,358 @@
+<div class="container-fluid form-bg">
+    <style>
+        .form-bg {
+
+            background:
+                linear-gradient(rgba(15, 23, 42, .70),
+                    rgba(15, 23, 42, .70)),
+                url('assets/img/hostel.png');
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            min-height: 100vh;
+
+            padding-top: 90px;
+            padding-bottom: 90px;
+        }
+
+        .modern-card {
+
+            background: rgba(255, 255, 255, .10);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            border: 1px solid rgba(255, 255, 255, .12);
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, .35);
+        }
+
+        .form-title {
+
+            color: white;
+
+            font-size: 42px;
+
+            font-weight: 700;
+
+            margin-bottom: 25px;
+        }
+
+        .modern-label {
+
+            color: white;
+
+            font-weight: 600;
+
+            margin-bottom: 6px;
+        }
+
+        .input-group-text {
+
+            background: rgba(255, 255, 255, .12);
+
+            color: white;
+
+            border: none;
+        }
+
+        .form-control {
+
+            height: 50px;
+
+            border: none;
+
+            background: rgba(255, 255, 255, .92);
+        }
+
+        .form-control:focus {
+
+            box-shadow:
+                0 0 0 3px rgba(255, 123, 0, .25);
+        }
+
+        .text-danger {
+
+            color: #ffb3b3 !important;
+        }
+
+        .save-btn {
+
+            background:
+                linear-gradient(135deg,
+                    #ff7b00,
+                    #ff4500);
+
+            border: none;
+
+            border-radius: 12px;
+
+            color: white;
+
+            padding: 10px 25px;
+
+            font-weight: 600;
+        }
+
+        .reset-btn {
+
+            border-radius: 12px;
+
+            padding: 10px 25px;
+        }
+    </style>
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card modern-card">
+
+                <div class="card-body">
+
+                    <!-- TITLE -->
+                    <h3 class="text-center form-title" *ngIf="!form.data.id">
+                        {{'Add User' | translate}}
+                    </h3>
+
+                    <h3 class="text-center form-title" *ngIf="form.data.id">
+                        {{'Update User' | translate}}
+                    </h3>
+
+                    <!-- SUCCESS MESSAGE -->
+                    <div *ngIf="!form.error && form.message" class="alert alert-success text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <!-- ERROR MESSAGE -->
+                    <div *ngIf="form.error && form.message" class="alert alert-danger text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <form>
+
+                        <!-- FIRST NAME -->
+                        <label class="modern-label">
+                            {{'First Name' | translate }}*
+                        </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.firstName" name="firstName"
+                                placeholder="First Name">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.firstName}}</span>
+                        </div>
+
+                        <!-- LAST NAME -->
+                        <label class="modern-label">
+                            {{'Last Name' | translate }}*
+                        </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user-circle"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.lastName" name="lastName"
+                                placeholder="Last Name">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.lastName}}</span>
+                        </div>
+
+                        <!-- EMAIL -->
+                        <label class="modern-label">
+                            {{'Email' | translate }}*
+                        </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.loginId" name="loginId"
+                                placeholder="Email">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.loginId}}</span>
+                        </div>
+
+                        <!-- PASSWORD -->
+                        <div *ngIf="!form.data.id">
+                            <label class="modern-label">
+                                {{'Password' | translate }}*
+                            </label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                                </div>
+                                <input type="password" class="form-control" [(ngModel)]="form.data.password"
+                                    name="password" placeholder="Password">
+                            </div>
+                            <small class="text-danger">{{form.inputerror.password}}</small>
+                        </div>
+
+                        <!-- MOBILE -->
+                        <label class="modern-label">
+                            {{'Mobile' | translate }}*
+                        </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-phone"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.phone" name="phone"
+                                placeholder="Mobile">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.phone}}</span>
+                        </div>
+
+                        <!-- ALTERNATE MOBILE -->
+                        <label class="modern-label">
+                            {{'Alternate Mobile' | translate }}
+                        </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-phone"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.alternateMobile"
+                                name="alternateMobile" placeholder="Alternate Mobile">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.alternateMobile}}</span>
+                        </div>
+                        <!-- ROLE -->
+                        <label class="modern-label">
+                            {{'Role' | translate }}*
+                        </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                            <select class="form-control" [(ngModel)]="form.data.roleId" name="roleId">
+                                <option value="undefined">Select Role</option>
+                                <option *ngFor="let obj of form.preload.roleList" [value]="obj.key">
+                                    {{obj.value}}
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.roleId}}</span>
+                        </div>
+
+                        <!-- GENDER -->
+                        <label class="modern-label">
+                            {{'Gender' | translate }}*
+                        </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-venus-mars"></i>
+                                </span>
+                            </div>
+                            <select class="form-control" [(ngModel)]="form.data.gender" name="gender">
+                                <option value="undefined">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.gender}}</span>
+                        </div>
+
+                        <!-- DOB -->
+                        <label class="modern-label">
+                            {{'DOB' | translate }}*
+                        </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                            <input type="date" class="form-control" [(ngModel)]="form.data.dob"
+                                [ngModel]="form.data.dob | date:'yyyy-MM-dd'" name="dob" [max]="datepicker.max">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.dob}}</span>
+                        </div>
+
+                        <!-- STATUS -->
+                        <label class="modern-label">
+                            {{'Status' | translate }}*
+                        </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-toggle-on"></i>
+                                </span>
+                            </div>
+                            <select class="form-control" [(ngModel)]="form.data.status" name="status">
+                                <option value="undefined">Select Status</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.status}}</span>
+                        </div>
+                        <!-- IMAGE -->
+                        <label class="modern-label">
+                            {{'Profile Image' | translate }}
+                        </label>
+                        <div class="mb-2 text-center">
+                            <img *ngIf="imagePreview" [src]="imagePreview" class="img-thumbnail" width="120">
+
+                            <img *ngIf="!imagePreview && form.data.imageId"
+                                src="http://localhost:8080/User/profilePic/{{form.data.id}}" class="img-thumbnail"
+                                width="120">
+
+                            <img *ngIf="!imagePreview && !form.data.imageId" src="assets/files/default.jpg"
+                                class="img-thumbnail" width="120">
+                        </div>
+
+                        <input type="file" #fileInput class="form-control mb-3"
+                            (change)="onFileSelect(fileInput.files)">
+
+                        <!-- BUTTONS -->
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn save-btn" (click)="onUpload()">
+                                {{form.data.id ? 'Update' : 'Save'}}
+                            </button>
+
+                            <button *ngIf="form.data.id" class="btn btn-warning" [routerLink]="['/userlist']">
+                                list
+                            </button>
+                            <button *ngIf="!form.data.id" type="button" class="btn btn-outline-light reset-btn" (click)="reset()">
+                                Reset
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

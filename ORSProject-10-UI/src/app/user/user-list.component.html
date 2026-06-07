@@ -1,0 +1,349 @@
+<div class="container-fluid list-bg">
+    <style>
+        .list-bg {
+
+    background:
+        linear-gradient(
+            rgba(15,23,42,.80),
+            rgba(15,23,42,.80)
+        ),
+        url('assets/img/list.png');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+
+    padding: 90px 40px;
+}
+
+.page-title {
+
+    color: white;
+
+    font-size: 3rem;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    margin-bottom: 35px;
+
+    text-shadow:
+        0 5px 15px rgba(0,0,0,.3);
+}
+
+.glass-card {
+
+    background: rgba(255,255,255,.08);
+
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 25px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.3);
+}
+
+.search-input,
+.search-select {
+
+    height: 50px;
+
+    border-radius: 12px;
+
+    border: none;
+}
+
+.search-btn {
+
+    height: 50px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+}
+
+.reset-btn {
+
+    height: 50px;
+
+    border-radius: 12px;
+}
+
+.modern-table {
+
+    color:white;
+
+    margin-bottom:0;
+}
+
+.modern-table thead {
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff7b00,
+        #ff4500
+    );
+}
+
+.modern-table tbody tr {
+
+    background: rgba(255,255,255,.05);
+
+    color: white;
+}
+
+.modern-table tbody tr:hover {
+
+    background:
+        rgba(255,255,255,.10);
+}
+
+.modern-table td{
+     border-color:
+    rgba(255,255,255,.08);
+
+    vertical-align:middle;
+}
+.modern-table th {
+
+    color:white;
+
+    border:none;
+
+    text-transform:uppercase;
+
+    font-weight:700;
+}
+
+.user-img {
+
+    width: 65px;
+
+    height: 65px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    border: 2px solid rgba(255,255,255,.15);
+}
+
+.action-btn {
+
+    border-radius: 10px;
+}
+    </style>
+
+    <!-- TITLE -->
+   <h1 class="page-title">
+        {{'User List' | translate}}
+    </h1>
+
+    <!-- SUCCESS -->
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4 alert alert-success alert-dismissible text-center" *ngIf="!form.error && form.message"
+            style="background-color:#80ff80;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{form.message}}
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
+
+    <!-- ERROR -->
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4 alert alert-danger alert-dismissible text-center" *ngIf="form.error && form.message">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{form.message}}
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
+
+ <!-- SEARCH SECTION -->
+<div *ngIf="form.list.length > 0" class="glass-card mb-4">
+
+    <div class="row g-3 align-items-center">
+
+        <div class="col-lg-4 col-md-6">
+
+            <input
+                type="text"
+                class="form-control search-input"
+                [(ngModel)]="form.searchParams.firstName"
+                placeholder="🔍 Enter First Name">
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <select
+                class="form-control search-select"
+                [(ngModel)]="form.searchParams.roleId">
+
+                <option [ngValue]="undefined">
+                    Select Role
+                </option>
+
+                <option
+                    *ngFor="let obj of form.preload.roleList"
+                    [ngValue]="obj.key">
+
+                    {{obj.value}}
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+
+            <button
+                (click)="search()"
+                class="btn search-btn w-100">
+
+                <i class="fa fa-search me-2"></i>
+                {{'Search' | translate}}
+
+            </button>
+
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+
+            <button
+                (click)="reset()"
+                class="btn btn-outline-light reset-btn w-100">
+
+                <i class="fa fa-refresh me-2"></i>
+                {{'Reset' | translate}}
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- TABLE -->
+    <div *ngIf="form.list.length > 0" class="table-responsive mt-4">
+
+      
+                <table class="table modern-table text-center">
+
+            <thead>
+                <tr>
+
+                    <th>
+                        <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll($event)">
+                        {{'Select All' | translate}}
+                    </th>
+
+                    <th>{{'S.NO' | translate}}</th>
+                    <th>{{'Image' | translate}}</th>
+                    <th>{{'First Name' | translate}}</th>
+                    <th>{{'Last Name' | translate}}</th>
+                    <th>{{'Email' | translate}}</th>
+                    <th>{{'Status' | translate}}</th>
+                    <th>{{'Role' | translate}}</th>
+                    <th>{{'Mobile' | translate}}</th>
+                    <th>{{'DOB' | translate}}</th>
+                    <th>{{'Edit' | translate}}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let m of form.list; let i = index">
+
+                    <td>
+                        <input #checkboxes type="checkbox" (change)="checklistUpdate()" [id]="m.id" [value]="m.id">
+                    </td>
+
+                    <td>{{(form.pageNo*5)+i+1}}</td>
+
+                    <!-- IMAGE -->
+                    <td>
+                        <img *ngIf="m.imageId" [src]="'http://localhost:8080/User/profilePic/' + m.id"
+                            class="img-thumbnail" width="70">
+
+                        <img *ngIf="!m.imageId" src="assets/files/default.jpg" class="img-thumbnail" width="70">
+                    </td>
+
+                    <td>{{m.firstName}}</td>
+                    <td>{{m.lastName}}</td>
+                    <td>{{m.loginId}}</td>
+                    <td>{{m.status}}</td>
+                    <td>{{m.roleName}}</td>
+                    <td>{{m.phone}}</td>
+                    <td>{{m.dob | date:'dd-MM-yyyy'}}</td>
+
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="forward('/user/' + m.id)">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- ACTIONS -->
+   <div *ngIf="form.list.length > 0" class="row mt-3 align-items-center">
+
+        <div class="col-md-4">
+            <button class="btn btn-warning btn-md" (click)="previous()" [disabled]="form.pageNo == 0">
+                Previous
+            </button>
+        </div>
+
+        <div class="col-md-4 text-center">
+            <button (click)="forward('/user')" class="btn btn-primary btn-md mr-2">
+                new
+            </button>
+
+            <button (click)="deleteMany()" class="btn btn-danger btn-md">
+                Delete
+            </button>
+        </div>
+
+        <div class="col-md-4 text-right">
+            <button class="btn btn-warning btn-md" (click)="next()" [disabled]="form.nextListSize == 0">
+                Next
+            </button>
+        </div>
+
+    </div>
+     <!-- NO DATA -->
+    <div *ngIf="form.list.length == 0" class="text-center mt-4">
+        <button (click)="reset()" class="btn btn-primary">
+            Back
+        </button>
+    </div>
+
+</div>

@@ -1,0 +1,310 @@
+<div class="container-fluid course-bg">
+    <style>
+.course-bg{
+
+    background:
+    linear-gradient(
+        rgba(15,23,42,.78),
+        rgba(15,23,42,.78)
+    ),
+    url('assets/img/wall.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+
+.course-card{
+
+    background: rgba(255,255,255,.08);
+
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    border-radius: 25px;
+
+    box-shadow:
+    0 20px 45px rgba(0,0,0,.35);
+}
+
+.form-title{
+
+    color: white;
+
+    font-size: 42px;
+
+    font-weight: 700;
+
+    margin-bottom: 25px;
+}
+
+.form-label{
+
+    color: white;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+.input-group-text{
+
+    background: rgba(255,255,255,.12);
+
+    color: white;
+
+    border: none;
+}
+
+.form-control{
+
+    border: none;
+
+    background: rgba(255,255,255,.95);
+
+    border-radius: 0 10px 10px 0;
+}
+
+.form-control:focus{
+
+    box-shadow:
+    0 0 0 3px rgba(255,123,0,.25);
+}
+
+.save-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff7b00,
+        #ff4500
+    );
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 10px 30px;
+}
+
+.reset-btn{
+
+    background:
+    rgba(255,255,255,.12);
+
+    color: white;
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    border-radius: 12px;
+
+    padding: 10px 30px;
+}
+
+.text-danger{
+
+    color: #ffb3b3 !important;
+}
+
+    </style>
+
+    <div class="row">
+
+        <div class="col-md-3"></div>
+
+        <div class="col-lg-6 col-md-8">
+
+            <div class="card course-card">
+
+                <div class="card-body p-4">
+
+                    <!-- TITLE -->
+                    <h3 class="text-center form-title" *ngIf="!form.data.id">
+                        Add Course
+                    </h3>
+
+                    <h3 class="text-center form-title" *ngIf="form.data.id>0">
+                        Update Course
+                    </h3>
+
+                    <!-- SUCCESS -->
+                    <div *ngIf="form.error == false && form.message"
+                        class="alert alert-success alert-dismissible text-center">
+
+                        <button type="button" class="close" data-dismiss="alert">
+                            &times;
+                        </button>
+
+                        {{ form.message }}
+
+                    </div>
+
+                    <!-- ERROR -->
+                    <div *ngIf="form.error && form.message"
+                        class="alert alert-danger alert-dismissible text-center">
+
+                        <button type="button" class="close" data-dismiss="alert">
+                            &times;
+                        </button>
+
+                        {{ form.message }}
+
+                    </div>
+
+                    <!-- NAME -->
+
+                    <label class="form-label">
+                        Name *
+                    </label>
+
+                    <div class="input-group mb-2">
+
+                        <div class="input-group-prepend">
+
+                            <span class="input-group-text">
+
+                                <i class="fa fa-book"></i>
+
+                            </span>
+
+                        </div>
+
+                        <input type="text"
+                               class="form-control"
+                               name="name"
+                               [(ngModel)]="form.data.name"
+                               placeholder="Enter Course Name">
+
+                    </div>
+
+                    <span class="text-danger">
+                        {{form.inputerror.name}}
+                    </span>
+
+                    <!-- DURATION -->
+
+                    <label class="form-label mt-3">
+                        Duration *
+                    </label>
+
+                    <div class="input-group mb-2">
+
+                        <div class="input-group-prepend">
+
+                            <span class="input-group-text">
+
+                                <i class="fa fa-clock"></i>
+
+                            </span>
+
+                        </div>
+
+                        <select class="form-control"
+                                name="duration"
+                                [(ngModel)]="form.data.duration">
+
+                            <option value="undefined">
+                                ------------Select------------
+                            </option>
+
+                            <option [value]="1">1 Year</option>
+                            <option [value]="2">2 Year</option>
+                            <option [value]="3">3 Year</option>
+                            <option [value]="4">4 Year</option>
+                            <option [value]="5">5 Year</option>
+
+                        </select>
+
+                    </div>
+
+                    <span class="text-danger">
+                        {{form.inputerror.duration}}
+                    </span>
+
+                    <!-- DESCRIPTION -->
+
+                    <label class="form-label mt-3">
+                        Description *
+                    </label>
+
+                    <div class="input-group mb-2">
+
+                        <div class="input-group-prepend">
+
+                            <span class="input-group-text">
+
+                                <i class="fa fa-list"></i>
+
+                            </span>
+
+                        </div>
+
+                        <textarea class="form-control"
+                                  name="description"
+                                  [(ngModel)]="form.data.description"
+                                  rows="3"
+                                  placeholder="Enter Short Description"></textarea>
+
+                    </div>
+
+                    <span class="text-danger">
+                        {{form.inputerror.description}}
+                    </span>
+
+                    <!-- BUTTONS -->
+
+                    <div class="text-center mt-4">
+
+                        <button *ngIf="!form.data.id"
+                                (click)="submit()"
+                                class="btn save-btn mr-2">
+
+                            Save
+
+                        </button>
+
+                        <button *ngIf="form.data.id"
+                                (click)="submit()"
+                                class="btn save-btn mr-2">
+
+                            Update
+
+                        </button>
+
+                        <button *ngIf="!form.data.id"
+                                (click)="reset()"
+                                class="btn reset-btn mr-2">
+
+                            Reset
+
+                        </button>
+
+                        <button *ngIf="form.data.id"
+                                (click)="forward('/courselist')"
+                                class="btn reset-btn">
+
+                            List
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3"></div>
+
+    </div>
+
+</div>

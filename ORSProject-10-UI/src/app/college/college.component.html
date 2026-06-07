@@ -1,0 +1,206 @@
+<div class="container-fluid" style="
+background:
+linear-gradient(rgba(15,23,42,.82),rgba(15,23,42,.82)),
+url('assets/img/wall.jpg');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+min-height: 100vh;
+padding-top: 90px;
+padding-bottom: 90px;">
+
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow-lg" style="
+background: rgba(255,255,255,.08);
+backdrop-filter: blur(20px);
+border-radius: 25px;
+overflow:hidden;">
+
+                <div class="card-body p-4">
+
+                    <!-- TITLE -->
+
+                    <h2 class="text-center text-white font-weight-bold mb-4" *ngIf="!form.data.id"
+                        style="text-shadow:0 4px 15px rgba(0,0,0,.4);">
+                        🏫 Add College
+                    </h2>
+
+                    <h2 class="text-center text-white font-weight-bold mb-4" *ngIf="form.data.id>0"
+                        style="text-shadow:0 4px 15px rgba(0,0,0,.4);">
+                        ✏️ Update College
+                    </h2>
+
+                    <!-- SUCCESS -->
+
+                    <div *ngIf="form.error == false && form.message"
+                        class="alert alert-success alert-dismissible text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ form.message }}
+                    </div>
+
+                    <!-- ERROR -->
+
+                    <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ form.message }}
+                    </div>
+
+                    <!-- NAME -->
+
+                    <label class="text-white font-weight-bold">
+                        College Name *
+                    </label>
+
+                    <div class="input-group mb-2">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-primary text-white border-0">
+                                <i class="fa fa-university"></i>
+                            </span>
+                        </div>
+
+                        <input type="text" class="form-control border-0" style="height:50px;" name="name"
+                            [(ngModel)]="form.data.name" placeholder="Enter College Name">
+
+                    </div>
+
+                    <div>
+                    <span class="text-warning">
+                        {{form.inputerror.name}}
+                    </span>
+                    </div>c
+
+                    <!-- ADDRESS -->
+
+                    <label class="text-white font-weight-bold mt-3">
+                        Address *
+                    </label>
+
+                    <div class="input-group mb-2">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-success text-white border-0">
+                                <i class="fa fa-address-book"></i>
+                            </span>
+                        </div>
+
+                        <input type="text" class="form-control border-0" style="height:50px;" name="address"
+                            [(ngModel)]="form.data.address" placeholder="Enter Address">
+
+                    </div>
+
+                    <div>
+                    <span class="text-warning">
+                        {{form.inputerror.address}}
+                    </span>
+                    </div>
+
+                    <!-- STATE -->
+
+                    <label class="text-white font-weight-bold mt-3">
+                        State *
+                    </label>
+
+                    <div class="input-group mb-2">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white border-0">
+                                <i class="fa fa-map"></i>
+                            </span>
+                        </div>
+
+                        <input type="text" class="form-control border-0" style="height:50px;" name="state"
+                            [(ngModel)]="form.data.state" placeholder="Enter State">
+
+                    </div>
+
+                    <div>
+                    <span class="text-warning">
+                        {{form.inputerror.state}}
+                    </span>
+                    </div>
+                    <!-- CITY -->
+
+                    <label class="text-white font-weight-bold mt-3">
+                        City *
+                    </label>
+
+                    <div class="input-group mb-2">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-warning text-dark border-0">
+                                <i class="fa fa-building"></i>
+                            </span>
+                        </div>
+
+                        <input type="text" class="form-control border-0" style="height:50px;" name="city"
+                            [(ngModel)]="form.data.city" placeholder="Enter City">
+
+                    </div>
+
+                    <div>
+                    <span class="text-warning">
+                        {{form.inputerror.city}}
+                    </span>
+                    </div>
+
+                    <!-- PHONE -->
+
+                    <label class="text-white font-weight-bold mt-3">
+                        Phone No *
+                    </label>
+
+                    <div class="input-group mb-2">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-danger text-white border-0">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                        </div>
+
+                        <input type="text" class="form-control border-0" style="height:50px;" name="phoneNo"
+                            [(ngModel)]="form.data.phoneNo" maxlength="10" placeholder="Enter Phone No">
+
+                    </div>
+
+                    <div>
+                    <span class="text-warning">
+                        {{form.inputerror.phoneNo}}
+                    </span>
+                    </div>
+
+                    <!-- BUTTONS -->
+
+                    <div class="text-center mt-4">
+
+                        <button *ngIf="!form.data.id" (click)="submit()" class="btn btn-success px-4 mr-2">
+                            <i class="fa fa-save"></i> Save
+                        </button>
+
+                        <button *ngIf="form.data.id" (click)="submit()" class="btn btn-success px-4 mr-2">
+                            <i class="fa fa-refresh"></i> Update
+                        </button>
+
+                        <button *ngIf="!form.data.id" (click)="reset()" class="btn btn-warning px-4 mr-2">
+                            <i class="fa fa-refresh"></i> Reset
+                        </button>
+
+                        <button *ngIf="form.data.id" (click)="forward('/collegelist')" class="btn btn-primary px-4">
+                            <i class="fa fa-list"></i> List
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
+
+</div>

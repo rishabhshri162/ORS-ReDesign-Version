@@ -1,0 +1,111 @@
+<div class="container-fluid"
+    style="background-image: url('assets/img/23964.jpg'); background-size: cover; background-attachment: fixed; min-height: 100vh; padding-top: 70px; padding-bottom: 75px;">
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card shadow-lg">
+                <div class="card-body">
+
+                    <!-- TITLE -->
+                    <h3 class="text-center text-primary mb-3" *ngIf="!form.data.id">
+                        Add Smart Home Device
+                    </h3>
+
+                    <h3 class="text-center text-primary mb-3" *ngIf="form.data.id">
+                        Update Smart Home Device
+                    </h3>
+
+                    <!-- SUCCESS MESSAGE -->
+                    <div *ngIf="!form.error && form.message" class="alert alert-success text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <!-- ERROR MESSAGE -->
+                    <div *ngIf="form.error && form.message" class="alert alert-danger text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <form>
+
+                        <!-- DEVICE NAME -->
+                        <label><b>Device Name*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-microchip"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.deviceName" name="deviceName"
+                                placeholder="Enter Device Name">
+                        </div>
+                        <span class="text-danger">{{form.inputerror.deviceName}}</span>
+
+
+                        <!-- DEVICE TYPE -->
+                        <label><b>Device Type*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-cogs"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.deviceType" name="deviceType"
+                                placeholder="Enter Device Type">
+                        </div>
+                        <span class="text-danger">{{form.inputerror.deviceType}}</span>
+
+
+                        <!-- CONNECTIVITY TYPE -->
+                        <label><b>Connectivity Type*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-wifi"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.connectivityType" name="connectivityType"
+                                placeholder="Enter Connectivity Type">
+                        </div>
+                        <span class="text-danger">{{form.inputerror.connectivityType}}</span>
+
+
+                        <!-- POWER STATUS -->
+                        <label><b>Power Status*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-bolt"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.powerStatus" name="powerStatus"
+                                placeholder="Enter Power Status (ON/OFF)">
+                        </div>
+                        <span class="text-danger">{{form.inputerror.powerStatus}}</span>
+
+
+                        <!-- BUTTONS -->
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-success me-2" (click)="submit()">
+                                {{form.data.id ? 'Update' : 'Save'}}
+                            </button>
+
+                            <button *ngIf="form.data.id" class="btn btn-warning" [routerLink]="['/smarthomedevicelist']">
+                                List
+                            </button>
+
+                            <button *ngIf="!form.data.id" type="button" class="btn btn-warning" (click)="reset()">
+                                Reset
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

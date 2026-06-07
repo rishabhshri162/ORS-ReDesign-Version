@@ -1,0 +1,102 @@
+<div class="container-fluid"
+    style="background-image: url('assets/img/bg.jpg'); background-size: cover; background-attachment: fixed; min-height: 100vh; padding-top: 70px; padding-bottom: 75px;">
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card shadow-lg">
+                <div class="card-body">
+
+                    <!-- TITLE -->
+                    <h3 class="text-center text-primary mb-3" *ngIf="!form.data.id">
+                        Add Purchase Record
+                    </h3>
+
+                    <h3 class="text-center text-primary mb-3" *ngIf="form.data.id">
+                        Update Purchase Record
+                    </h3>
+
+                    <!-- SUCCESS -->
+                    <div *ngIf="!form.error && form.message" class="alert alert-success text-center">
+                         <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <!-- ERROR -->
+                    <div *ngIf="form.error && form.message" class="alert alert-danger text-center">
+                         <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <form>
+
+                        <!-- PURCHASE ID -->
+                        <label><b>Purchase ID*</b></label>
+                        <input type="text" class="form-control mb-2"
+                            [(ngModel)]="form.data.purchaseId"
+                            name="purchaseId" placeholder="Enter Purchase ID">
+
+                            <div>
+                        <span class="text-danger">{{form.inputerror.purchaseId}}</span>
+                            </div>
+
+                        <!-- PURCHASE CODE -->
+                        <label><b>Purchase Code*</b></label>
+                        <input type="text" class="form-control mb-2"
+                            [(ngModel)]="form.data.purchaseCode"
+                            name="purchaseCode" placeholder="Enter Purchase Code">
+                            <div>
+                        <span class="text-danger">{{form.inputerror.purchaseCode}}</span>
+                            </div>
+
+                        <!-- SUPPLIER NAME -->
+                        <label><b>Supplier Name*</b></label>
+                        <input type="text" class="form-control mb-2"
+                            [(ngModel)]="form.data.supplierName"
+                            name="supplierName" placeholder="Enter Supplier Name">
+
+                            <div>
+                        <span class="text-danger">{{form.inputerror.supplierName}}</span>
+                            </div>
+                        <!-- AMOUNT -->
+                        <label><b>Amount*</b></label>
+                        <input type="text" class="form-control mb-2"
+                            [(ngModel)]="form.data.amount"
+                            name="amount" placeholder="Enter Amount">
+
+                            <div>
+                        <span class="text-danger">{{form.inputerror.amount}}</span>
+                            </div>
+
+                        <!-- STATUS -->
+                        <label><b>Status*</b></label>
+                        <input type="text" class="form-control mb-2"
+                            [(ngModel)]="form.data.status"
+                            name="status" placeholder="Enter Status">
+
+                            <div>
+                        <span class="text-danger">{{form.inputerror.status}}</span>
+                            </div>
+                        <!-- BUTTONS -->
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-success me-2" (click)="submit()">
+                                {{form.data.id ? 'Update' : 'Save'}}
+                            </button>
+
+                            <button *ngIf="form.data.id" class="btn btn-warning" [routerLink]="['/purchaselist']">
+                                List
+                            </button>
+
+                            <button *ngIf="!form.data.id" type="button" class="btn btn-warning" (click)="reset()">
+                                Reset
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

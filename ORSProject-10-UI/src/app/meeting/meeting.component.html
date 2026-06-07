@@ -1,0 +1,76 @@
+
+<div class="container-fluid"
+    style="background-image: url('assets/img/hostel.png'); background-size: cover; background-attachment: fixed; min-height: 100vh; padding-top: 70px; padding-bottom: 75px;">
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card shadow-lg">
+                <div class="card-body">
+
+                    <!-- TITLE -->
+                    <h3 class="text-center text-primary mb-3" *ngIf="!form.data.id">
+                        Add Meeting
+                    </h3>
+
+                    <h3 class="text-center text-primary mb-3" *ngIf="form.data.id">
+                        Update Meeting
+                    </h3>
+
+                    <!-- SUCCESS MESSAGE -->
+                    <div *ngIf="!form.error && form.message" class="alert alert-success text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <!-- ERROR MESSAGE -->
+                    <div *ngIf="form.error && form.message" class="alert alert-danger text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <form>
+
+                        <!-- TYPE -->
+                        <label><b>Name</b></label>
+                        <input type="text" class="form-control mb-2"
+                            [(ngModel)]="form.data.name"
+                            name="name"
+                            placeholder="Enter Meeting name">
+                        <div>
+                            <span class="text-danger">{{form.inputerror.name}}</span>
+                        </div>
+
+                        <!-- DESCRIPTION -->
+                        <label><b>Description</b></label>
+                        <textarea class="form-control mb-2"
+                            [(ngModel)]="form.data.description"
+                            name="description"
+                            placeholder="Enter Description"></textarea>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.description}}</span>
+                        </div>
+
+                        <!-- BUTTONS -->
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-success me-2" (click)="submit()">
+                                {{ form.data.id ? 'Update' : 'Save' }}
+                            </button>
+
+                            <button *ngIf="form.data.id" class="btn btn-warning" [routerLink]="['/meetinglist']">
+                                List
+                            </button>
+
+                            <button *ngIf="!form.data.id" type="button" class="btn btn-warning" (click)="reset()">
+                                Reset
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

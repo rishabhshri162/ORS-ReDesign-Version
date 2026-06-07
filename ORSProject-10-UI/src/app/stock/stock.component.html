@@ -1,0 +1,115 @@
+<div class="container-fluid"
+    style="background-image: url('assets/img/23964.jpg'); background-size: cover; background-attachment: fixed; min-height: 100vh; padding-top: 70px; padding-bottom: 75px;">
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card shadow-lg">
+                <div class="card-body">
+
+                    <!-- TITLE -->
+                    <h3 class="text-center text-danger mb-3" *ngIf="!form.data.id">
+                        Add Stock Record
+                    </h3>
+
+                    <h3 class="text-center text-danger mb-3" *ngIf="form.data.id">
+                        Update Stock Record
+                    </h3>
+
+                    <!-- SUCCESS MESSAGE -->
+                    <div *ngIf="!form.error && form.message" class="alert alert-success text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <!-- ERROR MESSAGE -->
+                    <div *ngIf="form.error && form.message" class="alert alert-danger text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{form.message}}
+                    </div>
+
+                    <form>
+
+                        <!-- STOCK ID -->
+                        <label><b>Stock ID*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-id-card"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.stockId"
+                                name="stockId" placeholder="Enter Stock ID">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.stockId}}</span>
+                        </div>
+
+                        <!-- STOCK NAME -->
+                        <label><b>Stock Name*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-tag"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="form.data.stockName"
+                                name="stockName" placeholder="Enter Stock Name">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.stockName}}</span>
+                        </div>
+
+                        <!-- PRICE -->
+                        <label><b>Price*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-money"></i>
+                                </span>
+                            </div>
+                            <input type="number" class="form-control" [(ngModel)]="form.data.price"
+                                name="price" placeholder="Enter Price">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.price}}</span>
+                        </div>
+
+                        <!-- QUANTITY -->
+                        <label><b>Quantity*</b></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-sort-numeric-asc"></i>
+                                </span>
+                            </div>
+                            <input type="number" class="form-control" [(ngModel)]="form.data.quantity"
+                                name="quantity" placeholder="Enter Quantity">
+                        </div>
+                        <div>
+                            <span class="text-danger">{{form.inputerror.quantity}}</span>
+                        </div>
+
+                        <!-- BUTTONS -->
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-success me-2" (click)="submit()">
+                                {{form.data.id ? 'Update' : 'Save'}}
+                            </button>
+
+                            <button *ngIf="form.data.id" class="btn btn-warning" [routerLink]="['/stocklist']">
+                                List
+                            </button>
+
+                            <button *ngIf="!form.data.id" type="button" class="btn btn-warning" (click)="reset()">
+                                Reset
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
