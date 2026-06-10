@@ -1,0 +1,35 @@
+.modern-alert {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 18px;
+    border-radius:14px;
+    margin-bottom:20px;
+}
+
+.alert-success-modern {
+    background:rgba(16,185,129,.15);
+    border:1px solid rgba(16,185,129,.45);
+    color:#6ee7b7;
+}
+
+.alert-danger-modern {
+    background:rgba(239,68,68,.15);
+    border:1px solid rgba(239,68,68,.45);
+    color:#fca5a5;
+}
+
+.alert-content{
+    display:flex;
+    align-items:center;
+}
+
+.alert-icon{
+    margin-right:10px;
+}
+
+.alert-close{
+    border:none;
+    background:transparent;
+    color:inherit;
+}

@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+isLogin() {
+
+   return !!localStorage.getItem('token');
+}
 }

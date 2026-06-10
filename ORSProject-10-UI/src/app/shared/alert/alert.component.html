@@ -1,0 +1,30 @@
+<div *ngIf="message"
+     class="modern-alert"
+     [ngClass]="{
+      'alert-success-modern': !error,
+      'alert-danger-modern': error
+     }">
+
+    <div class="alert-content">
+
+        <i *ngIf="!error"
+           class="fa fa-check-circle alert-icon">
+        </i>
+
+        <i *ngIf="error"
+           class="fa fa-exclamation-circle alert-icon">
+        </i>
+
+        {{ message }}
+
+    </div>
+
+    <button type="button"
+            class="alert-close"
+            (click)="close()">
+
+        <i class="fa fa-times"></i>
+
+    </button>
+
+</div>

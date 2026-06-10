@@ -84,6 +84,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { CustomerListComponent } from './customer/customer-list.component';
 import { MeetingComponent } from './meeting/meeting.component';
 import { MeetingListComponent } from './meeting/meeting-list.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -162,6 +163,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomerListComponent,
     MeetingComponent,
     MeetingListComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,

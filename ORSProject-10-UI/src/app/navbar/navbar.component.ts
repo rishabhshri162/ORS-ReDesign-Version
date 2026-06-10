@@ -62,4 +62,5 @@ export class NavbarComponent {
   isStudent(): boolean {
     return localStorage.getItem('role') === 'Student';
   }
+  
 }

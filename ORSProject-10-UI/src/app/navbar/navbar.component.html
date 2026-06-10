@@ -14,69 +14,70 @@
             0 8px 30px rgba(0, 0, 0, .25);
 
         min-height: 72px;
-           position: relative;
-    z-index: 10000;
+        position: relative;
+        z-index: 10000;
     }
 
-   .logo img{
-    height: 60px;
-    width: auto;
-}
+    .logo img {
+        height: 60px;
+        width: auto;
+    }
 
     .logo img:hover {
         transform: scale(1.05);
     }
 
-  .c1{
+    .c1 {
 
-    width: 230px;
-    height: 52px;
+        width: 230px;
+        height: 52px;
 
-    background: rgba(255,255,255,0.08);
+        background: rgba(255, 255, 255, 0.08);
 
-    color: #ffffff;
+        color: #ffffff;
 
-    border: 1px solid rgba(255,255,255,0.15);
+        border: 1px solid rgba(255, 255, 255, 0.15);
 
-    border-radius: 14px;
+        border-radius: 14px;
 
-    padding: 0 18px;
+        padding: 0 18px;
 
-    font-size: 18px;
+        font-size: 18px;
 
-    font-weight: 500;
+        font-weight: 500;
 
-    cursor: pointer;
+        cursor: pointer;
 
-    backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
 
-    transition: all .3s ease;
+        transition: all .3s ease;
 
-    outline: none;
-}
+        outline: none;
+    }
 
-.c1:hover{
+    .c1:hover {
 
-    border-color: #60a5fa;
+        border-color: #60a5fa;
 
-    box-shadow: 0 0 15px rgba(96,165,250,.25);
-}
+        box-shadow: 0 0 15px rgba(96, 165, 250, .25);
+    }
 
-.c1:focus{
+    .c1:focus {
 
-    border-color: #3b82f6;
+        border-color: #3b82f6;
 
-    box-shadow: 0 0 0 3px rgba(59,130,246,.25);
-}
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, .25);
+    }
 
-.c1 option{
+    .c1 option {
 
-    background: #1e293b;
+        background: #1e293b;
 
-    color: #ffffff;
+        color: #ffffff;
 
-    font-size: 16px;
-}
+        font-size: 16px;
+    }
+
     .navbar-nav .nav-link {
 
         color: white !important;
@@ -99,73 +100,72 @@
         color: #60a5fa !important;
     }
 
-   .dropdown-menu {
+    .dropdown-menu {
 
-    z-index: 10001 !important;
+        z-index: 10001 !important;
 
-    min-width: 260px;
+        min-width: 260px;
 
-    border: 1px solid rgba(255,255,255,.08);
+        border: 1px solid rgba(255, 255, 255, .08);
 
-    border-radius: 18px;
+        border-radius: 18px;
 
-    overflow: hidden;
+        overflow: hidden;
 
-    margin-top: 12px;
+        margin-top: 12px;
 
-    padding: 10px;
+        padding: 10px;
 
-    background: rgba(15,23,42,.96);
+        background: rgba(15, 23, 42, .96);
 
-    backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
 
-    -webkit-backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
 
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.35);
-}
+        box-shadow:
+            0 20px 50px rgba(0, 0, 0, .35);
+    }
 
     .dropdown-item {
 
-    color: white !important;
+        color: white !important;
 
-    border-radius: 12px;
+        border-radius: 12px;
 
-    padding: 12px 16px;
+        padding: 12px 16px;
 
-    font-size: 15px;
+        font-size: 15px;
 
-    font-weight: 500;
+        font-weight: 500;
 
-    transition: all .3s ease;
-}
+        transition: all .3s ease;
+    }
 
-.dropdown-item i{
+    .dropdown-item i {
 
-    width: 24px;
+        width: 24px;
 
-    text-align: center;
+        text-align: center;
 
-    color: #60a5fa;
-}
+        color: #60a5fa;
+    }
 
-.dropdown-item:hover {
+    .dropdown-item:hover {
 
-    background: linear-gradient(
-        135deg,
-        #2563eb,
-        #7c3aed
-    );
+        background: linear-gradient(135deg,
+                #2563eb,
+                #7c3aed);
 
-    color: white !important;
+        color: white !important;
 
-    transform: translateX(4px);
-}
+        transform: translateX(4px);
+    }
 
-.dropdown-item:hover i{
+    .dropdown-item:hover i {
 
-    color:white;
-}
+        color: white;
+    }
+
     .navbar-toggler {
 
         border: none !important;
@@ -216,10 +216,10 @@
         font-size: 11px;
     }
 
-    .modern-card{
-    position: relative;
-    z-index: 1;
-}
+    .modern-card {
+        position: relative;
+        z-index: 1;
+    }
 </style>
 
 <div class="header">
@@ -233,8 +233,8 @@
         <select #locale (change)='changeLocale(locale.value)' class="c1">
             <option value="undefined">{{'Select Language' | translate }}</option>
 
-           <option value="en">English</option>
-<option value="hi">{{'Hindi' | translate }}</option>
+            <option value="en">English</option>
+            <option value="hi">{{'Hindi' | translate }}</option>
         </select>
 
 
@@ -247,27 +247,25 @@
         <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 15px;">
             <ul class="navbar-nav ml-auto" style="padding-right: 6.5%;">
 
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" [routerLink]="['myNav']"
-                        id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <div class="user-box">
+                <li>
+                    <div class="user-box">
 
-                            <img src="assets/img/avatar.webp">
+                        <img src="assets/img/avatar.webp">
 
-                            <span class="user-name">
-                                {{'Hi,Guest'| translate}}
-                            </span>
+                        <span class="user-name">
+                            {{'Welcome,Guest'| translate}}
+                        </span>
 
-                        </div>
-                    </a>
+                    </div>
 
-                    <div class="dropdown-menu" id="myNav" aria-labelledby="navbarDropdown">
+
+                    <!-- <div class="dropdown-menu" id="myNav" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" [routerLink]="['/login']"><i class="fa fa-user"></i> &nbsp; &nbsp;
                             &nbsp; {{'Log in' | translate}}</a>
                         <a class="dropdown-item" [routerLink]="['/signup']"><i class=" fa fa-users"></i> &nbsp; {{'User
                             Registration' |
                             translate}}</a>
-                    </div>
+                    </div> -->
                 </li>
                 <li>
 
@@ -816,6 +814,7 @@
                         translate}}</a>
                 </div>
             </li>
+            
         </ul>
     </div>
 </nav>
